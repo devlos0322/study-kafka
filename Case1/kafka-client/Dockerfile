@@ -13,10 +13,7 @@ RUN wget https://archive.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz\
  && ln -s kafka_2.11-1.0.0 kafka
 
 RUN rm -r kafka_2.11-1.0.0.tgz
+
 CMD ["/bin/bash"]
-
-EXPOSE 9092 2181
-
-# docker build . -t ubuntu-client
-# docker run -it ubuntu-client
+EXPOSE 22
 # docker exec -it e1a3d22a0f83 /bin/bash
