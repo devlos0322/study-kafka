@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  zookeeper-server-ssl:
+    container_name: zookeeper-server-ssl
+    build: ./zookeeper-server
+    ports:
+      - "10022:22"
+      - "2181:2181"
+    stdin_open: true
+    tty: true
+  kafka-server-ssl:
+    container_name: kafka-server-ssl
+    privileged: true
+    build: ./kafka-server
+    ports:
+      - "20022:22"
+      - "9092:9092"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - zookeeper-server-ssl
+  kafka-client-ssl:
+    container_name: kafka-client-ssl
+    build: ./kafka-client
+    ports:
+      - "30022:22"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - zookeeper-server-ssl
+      - kafka-server-ssl

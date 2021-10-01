@@ -1,12 +1,13 @@
 ## Case1: Zookeeper Server, Kafka Server, Kafka Client with Basic Options
 ---
-
+Case1은 기본적인 도커패키지를 이용
 ## 사용법
 1. ### 설치
     프로젝트 다운로드 및 서버 IP address를 서버 환경에 맞게 수정
     ```bash
     git clone https://github.com/devlos0322/study-kafka.git
     vim ./study-kafka/Case1/kafka-server/config/server.properties
+    # (Windows OS 의 경우 다운로드 받은 repository 경로에 직접 접근하여 IP 정보 수정)
     #### 수정 ####
     advertised.listeners=PLAINTEXT://192.168.33.56:9092 # Host IP 정보: 192.168.33.56
     ```
