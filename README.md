@@ -1,18 +1,19 @@
-"# study-kafka" 
-
-## Case1: Single Zookeeper Server, Single Kafka Server, Single Kafka Client of Basic Options.
-
+## Case1: Zookeeper Server, Kafka Server, Kafka Client of Basic Options
+---
 
 ## 사용법
 1. ### 설치
-    Case1/kafka-server/config/server.properties 파일에서 카프카 서버 ID를 서버 환경에 맞게 수정
+    프로젝트 다운로드 및 서버 IP address를 서버 환경에 맞게 수정
     ```bash
+    git clone https://github.com/devlos0322/study-kafka.git
+    vim ./study-kafka/Case1/kafka-server/config/server.properties
+    #### 수정 ####
     advertised.listeners=PLAINTEXT://192.168.33.56:9092 # Host IP 정보: 192.168.33.56
     ```
 
-
     Case1 디렉토리로 이동하여 아래 명령어 실행
     ```bash
+    cd ./study-kafka/Case1/
     docker-compose up -d
     ```
 2. ### 테스트 클라이언트 설정
