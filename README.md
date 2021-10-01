@@ -1,4 +1,4 @@
-## Case1: Zookeeper Server, Kafka Server, Kafka Client of Basic Options
+## Case1: Zookeeper Server, Kafka Server, Kafka Client with Basic Options
 ---
 
 ## 사용법
@@ -65,7 +65,9 @@
 
 
 
-## Case2: Single Zookeeper Server, Single Kafka Server, Single Kafka Client of Basic Options.
+## Case2: Zookeeper Server, Kafka Server, Kafka Client with SSL Encryption
+
+
 ### Zookeeper Server
 포트정보
 | 포트번호   | 기능 |
