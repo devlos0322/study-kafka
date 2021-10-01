@@ -7,8 +7,16 @@ RUN apt-get install systemd -y
 RUN apt-get install -y wget net-tools netcat tar vim
 RUN apt-get install -y openssh-client
 RUN apt-get install -y openssh-server
-RUN mkdir -p /app
+RUN mkdir -p /app/ssl
+RUN mkdir -p /home/root
 WORKDIR /app
+
+RUN mkdir /var/run/sshd
+RUN echo 'root:root' |chpasswd
+RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+
+RUN mkdir /root/.ssh
 
 RUN wget https://archive.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz\
  && tar -xzf kafka_2.11-1.0.0.tgz\
@@ -16,7 +24,6 @@ RUN wget https://archive.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz\
 
 RUN rm -r kafka_2.11-1.0.0.tgz
 COPY ./config/server.properties /app/kafka/config/server.properties
-
 WORKDIR /app/ssl
 # 인증서 생성
 ENV SRVPASS=serversecret
@@ -30,10 +37,15 @@ RUN openssl x509 -req -CA ca-cert -CAkey ca-key -in cert-file -out cert-signed -
 RUN keytool -keystore kafka.server.keystore.jks -alias CARoot -import -file ca-cert -storepass $SRVPASS -keypass $SRVPASS -noprompt
 # truststore 생성
 RUN keytool -keystore kafka.server.keystore.jks -import -file cert-signed -storepass $SRVPASS -keypass $SRVPASS -noprompt
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN keytool -keystore kafka.server.truststore.jks -alias CARoot -import -file ca-cert -storepass $SRVPASS -keypass $SRVPASS -noprompt
 
-EXPOSE 9092 22
-CMD ["/app/kafka/bin/kafka-server-start.sh", "/app/kafka/config/server.properties"]
+
+WORKDIR /app
+
+EXPOSE 9093 
+EXPOSE 22
+# CMD ["/bin/bash"]
+CMD /usr/sbin/sshd -D; service ssh start; /app/kafka/bin/kafka-server-start.sh /app/kafka/config/server.properties
 # docker exec -it e1a3d22a0f83 /bin/bash
 
 # docker-compose up --build -d

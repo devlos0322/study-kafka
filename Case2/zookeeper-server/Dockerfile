@@ -15,7 +15,8 @@ RUN wget https://archive.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz\
 RUN rm -r kafka_2.11-1.0.0.tgz
 COPY ./config/zookeeper.properties /app/kafka/config/zookeeper.properties
 
-EXPOSE 2181 22
+EXPOSE 2181
+EXPOSE 22
 CMD ["/app/kafka/bin/zookeeper-server-start.sh", "/app/kafka/config/zookeeper.properties"]
 
 # docker container ls

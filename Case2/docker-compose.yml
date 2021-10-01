@@ -5,8 +5,8 @@ services:
     container_name: zookeeper-server-ssl
     build: ./zookeeper-server
     ports:
-      - "10022:22"
       - "2181:2181"
+      - "10022:22"
     stdin_open: true
     tty: true
   kafka-server-ssl:
@@ -14,8 +14,8 @@ services:
     privileged: true
     build: ./kafka-server
     ports:
+      - "9093"
       - "20022:22"
-      - "9092:9092"
     stdin_open: true
     tty: true
     depends_on:
