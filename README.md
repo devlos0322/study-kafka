@@ -1,3 +1,29 @@
+```dockerfile
+FROM  <이미지>:<태그>
+# 도커 이미지는 Base 이미지부터 시작해서 새로운 이미지들을 중첩하며 만들어진다. From은 base이미지다. 일반적으로 Dockerhub와 같은 Docker repository에 올려놓은 잘 알려진 공개 이미지인 경우가 많다.
+
+WORKDIR <이동할 경로>
+# Shell cd 명령문 처럼 컨테이너 상에서 작업 디렉터리의 전환을 위해 사용된다. WORKDIR 명령문으로 디렉토리를 지정하면 그 이후에 등장하는 모든 명령문은 해당 디렉터리를 기준으로 실행된다.
+
+RUN ["<커맨드>", "<파라미터1>", "<파라미터2>"]
+RUN <전체 커맨드>
+# RUN 명령문은 마치 쉘에서 커맨드를 실행하는 것 처럼 이미지 빌드과정에서 필요한 커맨드를 실행하기 위해 사용된다.
+RUN npm install --silent
+
+ENTRYPOINT ["<커맨드>", "<파라미터1>", "<파라미터2>"]
+ENTRYPOINT <전체 커맨드>
+# ENTRYPOINT 명령문은 이미지를 컨테이너로 띄울 때 항상 실행되야하는 커맨드를 지정할 때 새용한다.
+ENTRYPOINT ["npm", "start"] 
+
+CMD ["<커맨드>", "<파라미터1>", "<파라미터2>"]
+CMD ["<파라미터1>", "<파라미터2>"]
+CMD <전체 커맨드>
+# CMD 명령문은 해당 이미지를 컨테이너로 띄울 때 디폴트로 실행할 커맨드나, ENTRYPOINT 명령문으로 지정된 커맨드에 디폴트로 넘길 파라메터를 지정할 때 사용한다.
+
+https://github.com/cdr/code-server
+
+```
+
 ## Case1: Zookeeper Server, Kafka Server, Kafka Client with Basic Options
 ---
 Case1은 기본적인 도커패키지를 이용
