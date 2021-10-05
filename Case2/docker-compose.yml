@@ -14,7 +14,8 @@ services:
     privileged: true
     build: ./kafka-server
     ports:
-      - "9093"
+      - "9092:9092"
+      - "9093:9093"
       - "20022:22"
     stdin_open: true
     tty: true
