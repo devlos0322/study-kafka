@@ -17,7 +17,7 @@ COPY ./config/zookeeper.properties /app/kafka/config/zookeeper.properties
 
 EXPOSE 2181
 EXPOSE 22
-CMD ["/app/kafka/bin/zookeeper-server-start.sh", "/app/kafka/config/zookeeper.properties"]
+ENTRYPOINT ["/app/kafka/bin/zookeeper-server-start.sh", "/app/kafka/config/zookeeper.properties"]
 
 # docker container ls
 # docker exec -it e1a3d22a0f83 /bin/bash

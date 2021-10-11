@@ -20,7 +20,7 @@ ENV CLIPASS=clientpass
 RUN mkdir ssl && cd ssl
 RUN apt-get install -y sshpass
 WORKDIR /app/ssl
-CMD sshpass -proot scp -o StrictHostKeyChecking=no root@kafka-server-ssl:/app/ssl/ca-cert .; keytool -keystore kafka.client.truststore.jks -alias CARoot -import -file ca-cert -storepass $CLIPASS -keypass $CLIPASS -noprompt; cd /app ;/bin/bash
+ENTRYPOINT [ "executable" ] sshpass -proot scp -o StrictHostKeyChecking=no root@kafka-server-ssl:/app/ssl/ca-cert .; keytool -keystore kafka.client.truststore.jks -alias CARoot -import -file ca-cert -storepass $CLIPASS -keypass $CLIPASS -noprompt; cd /app ;/bin/bash
 EXPOSE 22
 # docker exec -it e1a3d22a0f83 /bin/bash
 

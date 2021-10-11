@@ -45,7 +45,7 @@ WORKDIR /app
 EXPOSE 9093 
 EXPOSE 22
 # CMD ["/bin/bash"]
-CMD /usr/sbin/sshd -D; service ssh start; /app/kafka/bin/kafka-server-start.sh /app/kafka/config/server.properties
+ENTRYPOINT /usr/sbin/sshd -D; service ssh start; /app/kafka/bin/kafka-server-start.sh /app/kafka/config/server.properties
 # docker exec -it e1a3d22a0f83 /bin/bash
 
 # docker-compose up --build -d
