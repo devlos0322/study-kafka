@@ -24,5 +24,6 @@ ENTRYPOINT [ "executable" ] sshpass -proot scp -o StrictHostKeyChecking=no root@
 EXPOSE 22
 # docker exec -it e1a3d22a0f83 /bin/bash
 
+# 테스트 클라이언트 실행
 # /app/kafka/bin/kafka-console-producer.sh --broker-list kafka-server-ssl:9093 --topic kafka-security-topic --producer.config /app/kafka/config/client.properties
 # /app/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka-server-ssl:9093 --topic kafka-security-topic --consumer.config /app/kafka/config/client.properties
