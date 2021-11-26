@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  zookeeper-server-b:
+    container_name: zookeeper-server-b
+    build: ./zookeeper-server
+    ports:
+      - "11022:22"
+      - "2281:2281"
+    stdin_open: true
+    tty: true
+  kafka-server-b:
+    container_name: kafka-server-b
+    privileged: true
+    build: ./kafka-server
+    ports:
+      - "21022:22"
+      - "9192:9192"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - zookeeper-server-b
